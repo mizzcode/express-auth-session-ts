@@ -1,6 +1,7 @@
 import { Express, Request, Response } from 'express';
 import * as argon2 from 'argon2';
 import { UserService } from '../services/UserService';
+import authMiddleware from '../middlewares/authMiddleware';
 
 export class UserController {
   // define types
@@ -11,13 +12,14 @@ export class UserController {
   }
   // inisiasi route
   init() {
-    this.app.get('/', this.index);
+    this.app.get('/', authMiddleware, this.index);
     this.app.get('/login', this.login);
     this.app.post('/login', this.postLogin);
   }
 
-  index(_: Request, res: Response) {
-    return res.render('index');
+  index(req: Request, res: Response) {
+    // @ts-expect-error not declared
+    return res.render('index', { user: req.session.user });
   }
 
   login(_: Request, res: Response) {
@@ -35,6 +37,8 @@ export class UserController {
       }
 
       console.info('success login');
+      // @ts-expect-error not declared
+      req.session.user = user;
       return res.redirect('/');
     } catch (err: any) {
       console.error(err);
