@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Homepage</title>
   </head>
   <body>
-    <h1>Home Page</h1>
-    <h2>Halo, <%= user[0].email %></h2>
-    <button><a href="/login">Login</a></button>
+    <div class="mt-7 p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg flex items-center">
+      <h1 class="text-violet-300 font-bold underline">LOGO</h1>
+      <h2 class="hover:text-emerald-500 mx-auto">Good Night, <%= user[0].name %>!</h2>
+      <div class="text-white py-2 px-3 rounded-xl bg-red-500"><a href="/logout">Logout</a></div>
+    </div>
   </body>
 </html>
