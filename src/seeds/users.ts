@@ -7,7 +7,7 @@ export async function seed(knex: Knex): Promise<void> {
 
   // Inserts seed entries
   await knex('users').insert([
-    { email: 'mizz@gmail.com', password: await argon2.hash('password') },
-    { email: 'jani@gmail.com', password: await argon2.hash('password') },
+    { email: 'mizz@gmail.com', name: 'Mizz', password: await argon2.hash('password') },
+    { email: 'jani@gmail.com', name: 'Jani', password: await argon2.hash('password') },
   ]);
 }

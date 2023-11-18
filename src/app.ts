@@ -11,13 +11,9 @@ import session from 'express-session';
 const app: Express = express();
 const port: string | number = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(process.cwd(), 'src', 'views'));
-
+app.use(express.static(path.join(process.cwd(), 'src', 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-// inisiasi express-session
-app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
     secret: 'cat',
@@ -26,6 +22,11 @@ app.use(
     cookie: { path: '/', secure: false, maxAge: 3_600_000 },
   })
 );
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(process.cwd(), 'src', 'views'));
+// inisiasi express-session
+app.set('trust proxy', 1); // trust first proxy
 
 // connect db postgres client
 Model.knex(knex(config.development));
