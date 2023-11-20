@@ -19,6 +19,7 @@
 > npm run dev # run in development mode
 > npm run setup # run migration, seeder
 > npm run tailwind:css # run watch tailwind css
+> npm run tailwind:minify # run minify tailwind css
 ```
 
 ## Config
