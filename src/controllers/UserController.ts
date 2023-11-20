@@ -15,6 +15,7 @@ export class UserController {
     this.app.get('/', authMiddleware, this.index);
     this.app.get('/login', this.login);
     this.app.post('/login', this.postLogin);
+    this.app.get('/logout', authMiddleware, this.logout);
   }
 
   index(req: Request, res: Response) {
@@ -25,6 +26,7 @@ export class UserController {
   login(_: Request, res: Response) {
     return res.render('login');
   }
+  
   async postLogin(req: Request, res: Response) {
     const { email, password } = req.body;
 
@@ -46,5 +48,12 @@ export class UserController {
 
       return res.render('login');
     }
+  }
+
+  logout(req: Request, res: Response) {
+    // @ts-expect-error
+    req.session.destroy();
+
+    res.redirect('/login');
   }
 }
